@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Products() {
   const [data, setData] = useState([]);
   const [skip, setSkip] = useState(0);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products?limit=10&skip=${skip}`)
@@ -25,6 +27,7 @@ export default function Products() {
             <th>ID</th>
             <th>Title</th>
             <th>Description</th>
+            <th>Action</th>
           </tr>
         </thead>
 
@@ -34,12 +37,24 @@ export default function Products() {
               <td>{item.id}</td>
               <td>{item.title}</td>
               <td>{item.description}</td>
+              <td className="text-center">
+                <div className="d-flex gap-2 justify-content-center">
+                  <button className="btn btn-sm btn-info">View</button>
+                  <button className="btn btn-sm btn-warning">Edit</button>
+                  <button
+                    className="btn btn-sm btn-danger"
+                    onClick={() => navigate(`/delete/${item.id}`)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              </td>
             </tr>
           ))}
         </tbody>
       </table>
 
-      <div className="d-flex justify-content-between mt-3">
+      <div className="d-flex justify-content-end gap-2 mt-3">
         <button
           className="btn btn-primary"
           onClick={() => setSkip(skip - 10)}

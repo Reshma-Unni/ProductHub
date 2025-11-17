@@ -16,11 +16,10 @@ export default function Products() {
     <div className="container mt-4">
       <h2 className="text-center mb-3">Product List</h2>
 
-      {skip === 0 && (
-        <div className="d-flex justify-content-end mb-3">
-          <button className="btn btn-primary mb-3">Add Product</button>
-        </div>
-      )}
+      <div className="d-flex justify-content-end mb-3">
+        <button className="btn btn-primary mb-3">Add Product</button>
+      </div>
+
       <table className="table table-dark table-striped table-bordered text-center">
         <thead>
           <tr>

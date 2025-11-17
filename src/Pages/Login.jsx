@@ -9,7 +9,7 @@ export default function Login() {
   const handleLogin = () => {
     if (username === "resh" && password === "143") {
       // alert("Login Successful");
-      navigate("/products");
+      navigate("/product-hub/dashboard/products");
     } else {
       alert("Invalid Cred");
     }

@@ -1,4 +1,5 @@
 import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
 
 export default function Header() {
   const navigate = useNavigate();
@@ -18,9 +19,12 @@ export default function Header() {
           Search Product
         </button>
 
-        <button className="btn btn-danger" onClick={handleLogout}>
+        {/* <button className="btn btn-danger" onClick={handleLogout}>
           LogOut
-        </button>
+        </button> */}
+        <Button variant="danger" onClick={handleLogout}>
+          Logout
+        </Button>
       </div>
     </div>
   );

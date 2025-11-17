@@ -1,17 +1,20 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Toast from "react-bootstrap/Toast";
+import ToastContainer from "react-bootstrap/ToastContainer";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showA, setShowA] = useState(false);
+  const toggleShowA = () => setShowA(!showA);
   const navigate = useNavigate();
 
   const handleLogin = () => {
     if (username === "resh" && password === "143") {
-      // alert("Login Successful");
       navigate("/product-hub/dashboard/products");
     } else {
-      alert("Invalid Cred");
+      toggleShowA();
     }
   };
 
@@ -48,6 +51,19 @@ export default function Login() {
           Submit
         </button>
       </div>
+      <ToastContainer className="p-3" position="top-end" style={{ zIndex: 1 }}>
+        <Toast show={showA} onClose={toggleShowA} delay={3000} autohide>
+          <Toast.Header>
+            <img
+              src="holder.js/20x20?text=%20"
+              className="rounded me-2"
+              alt=""
+            />
+            <strong className="me-auto">Error</strong>
+          </Toast.Header>
+          <Toast.Body>Invalid Credentials</Toast.Body>
+        </Toast>
+      </ToastContainer>
     </div>
   );
 }

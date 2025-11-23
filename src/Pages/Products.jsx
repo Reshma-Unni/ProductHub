@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
 
 export default function Products() {
   const [data, setData] = useState([]);
@@ -38,7 +40,10 @@ export default function Products() {
               <td>{item.description}</td>
               <td className="text-center">
                 <div className="d-flex gap-2 justify-content-center">
-                  <button className="btn btn-sm btn-info">View</button>
+                  <Link to={`/product/${item.id}`}>
+                    <Button variant="primary">View</Button>
+                  </Link>
+                  {/* <button className="btn btn-sm btn-info">View</button> */}
                   <button className="btn btn-sm btn-warning">Edit</button>
                   <button
                     className="btn btn-sm btn-danger"

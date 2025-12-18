@@ -6,7 +6,6 @@ import {
 } from "react-router-dom";
 import Login from "./Pages/Login";
 import Products from "./Pages/Products";
-
 import View from "./Pages/ViewProd";
 import Layout from "./Pages/Layout";
 import EditProduct from "./Pages/EditProd";

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import EditProduct from "./EditProd";
+import { getAllProducts, deleteProduct, searchProduct } from "../utils/api";
 
 export default function Products() {
   const [data, setData] = useState([]);
@@ -13,10 +13,16 @@ export default function Products() {
   const [show, setShow] = useState(false);
   const [deleteSuccess, setDeleteSuccess] = useState(false);
 
+  // useEffect(() => {
+  //   fetch(`https://dummyjson.com/products?limit=10&skip=${skip}`)
+  //     .then((res) => res.json())
+  //     .then((result) => setData(result.products));
+  // }, [skip]);
+
   useEffect(() => {
-    fetch(`https://dummyjson.com/products?limit=8&skip=${skip}`)
-      .then((res) => res.json())
-      .then((result) => setData(result.products));
+    getAllProducts(10, skip).then((result) => {
+      setData(result.products);
+    });
   }, [skip]);
 
   const confirmDelete = (id) => {
@@ -24,23 +30,41 @@ export default function Products() {
     setShow(true);
     setDeleteSuccess(false); // reset success message
   };
+  // const handleDelete = () => {
+  //   fetch(`https://dummyjson.com/products/${deleteId}`, {
+  //     method: "DELETE",
+  //   })
+  //     .then((res) => res.json())
+  //     .then(() => {
+  //       setDeleteSuccess(true); // show success msg
+  //       setTimeout(() => setShow(false), 1500); // auto close after 1.5 sec
+  //     });
+  // };
+
   const handleDelete = () => {
-    fetch(`https://dummyjson.com/products/${deleteId}`, {
-      method: "DELETE",
-    })
-      .then((res) => res.json())
+    deleteProduct(deleteId)
       .then(() => {
         setDeleteSuccess(true); // show success msg
         setTimeout(() => setShow(false), 1500); // auto close after 1.5 sec
-      });
+      })
+      .catch((err) => console.error(err));
   };
 
-  const handleSearch = () => {
-    fetch(`https://dummyjson.com/products/search?q=${search}`)
-      .then((res) => res.json())
-      .then((result) => {
-        setData(result.products); // only searched items
-      });
+  // const handleSearch = () => {
+  //   fetch(`https://dummyjson.com/products/search?q=${search}`)
+  //     .then((res) => res.json())
+  //     .then((result) => {
+  //       setData(result.products); // only searched items
+  //     });
+  // };
+
+  const handleSearch = async () => {
+    try {
+      const result = await searchProduct(search);
+      setData(result.products);
+    } catch (error) {
+      console.error("Search failed:", error);
+    }
   };
 
   return (
@@ -59,7 +83,7 @@ export default function Products() {
       <div className="d-flex justify-content-end mb-3">
         <button
           className="btn btn-primary mb-3"
-          onClick={() => navigate("/product/add")}
+          onClick={() => navigate("/addproduct")}
         >
           Add Product
         </button>
@@ -98,7 +122,7 @@ export default function Products() {
               <td>{item.description}</td>
               <td className="text-center">
                 <div className="d-flex gap-2 justify-content-center">
-                  <Link to={`/product/${item.id}`}>
+                  <Link to={`${item.id}`}>
                     <Button variant="primary">View</Button>
                   </Link>
 

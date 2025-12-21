@@ -1,36 +1,48 @@
-import { useEffect, useState } from "react";
+import { useEffect, useReducer } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+
+const initialState = {
+  title: "",
+  brand: "",
+  category: "",
+  price: "",
+  weight: "",
+  stock: "",
+  warrantyInformation: "",
+  rating: "",
+  shippingInformation: "",
+  returnPolicy: "",
+};
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "Set_Field":
+      return { ...state, [action.field]: action.value };
+    case "Set_All":
+      return { ...state, ...action.payload };
+    default:
+      return state;
+  }
+}
 
 export default function EditProd() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  const [product, setProduct] = useState({
-    title: "",
-    brand: "",
-    category: "",
-    price: "",
-    weight: "",
-    stock: "",
-    warrantyInformation: "",
-    rating: "",
-    shippingInformation: "",
-    returnPolicy: "",
-  });
+  const [product, dispatch] = useReducer(reducer, initialState);
 
   // Fetch product data by ID
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
       .then((res) => res.json())
-      .then((data) => setProduct(data));
+      .then((data) => dispatch({ type: "Set_All", payload: data }));
   }, [id]);
-  console.log(product);
 
-  // Update input fields
   const handleChange = (e) => {
-    setProduct({
-      ...product,
-      [e.target.name]: e.target.value,
+    dispatch({
+      type: "Set_Field",
+      field: e.target.name,
+      value: e.target.value,
     });
   };
 
@@ -103,6 +115,7 @@ export default function EditProd() {
         value={product.stock}
         onChange={handleChange}
       />
+
       <label className="mt-3">Warranty</label>
       <input
         type="text"
@@ -111,6 +124,7 @@ export default function EditProd() {
         value={product.warrantyInformation}
         onChange={handleChange}
       />
+
       <label className="mt-3">Rating</label>
       <input
         type="number"
@@ -119,6 +133,7 @@ export default function EditProd() {
         value={product.rating}
         onChange={handleChange}
       />
+
       <label className="mt-3">Shipping</label>
       <input
         type="text"
@@ -127,6 +142,7 @@ export default function EditProd() {
         value={product.shippingInformation}
         onChange={handleChange}
       />
+
       <label className="mt-3">ReturnPolicy</label>
       <input
         type="text"
@@ -142,7 +158,7 @@ export default function EditProd() {
 
       <button
         className="btn btn-secondary mt-4 ms-2"
-        onClick={() => navigate(`/product/${id}`)}
+        onClick={() => navigate(`/product-hub/dashboard/products/${id}`)}
       >
         Cancel
       </button>

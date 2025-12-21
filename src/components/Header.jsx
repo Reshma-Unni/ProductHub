@@ -17,7 +17,7 @@ export default function Header() {
     <header className="bg-dark py-3 text-white">
       <Container className="d-flex justify-content-end align-items-center">
         <div className="me-3">
-          {user ? `Logged in as ${user.username}` : "Not logged in"}
+          {user ? `${user.username}` : "Not logged in"}
         </div>
         <Button variant="danger" onClick={handleLogout}>
           Logout

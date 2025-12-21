@@ -24,3 +24,8 @@ export async function searchProduct(query) {
   const res = await fetch(API.searchProduct(query));
   return res.json();
 }
+
+// export async function searchProduct(query) {
+//   const res = await fetch(API.searchProduct(query));
+//   return res.json();
+// }

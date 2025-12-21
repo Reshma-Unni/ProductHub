@@ -157,7 +157,7 @@ export default function EditProd() {
       </button>
 
       <button
-        className="btn btn-secondary mt-4 ms-2"
+        className="btn btn-dark mt-4 ms-2"
         onClick={() => navigate(`/product-hub/dashboard/products/${id}`)}
       >
         Cancel

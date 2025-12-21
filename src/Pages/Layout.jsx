@@ -1,28 +1,20 @@
-import Sidebar from "./Sidebar";
-import Header from "./Header";
-import Footer from "./Footer";
+import Sidebar from "../components/Sidebar";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 import { Outlet } from "react-router-dom";
 
 export default function Layout() {
   return (
-    <div style={{ display: "flex", minHeight: "100vh" }}>
+    <div className="d-flex min-vh-100">
       {/* Sidebar */}
       <Sidebar />
-      {/* Right side (Header + Content + Footer) */}
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          width: "100%",
-          minHeight: "100vh",
-          backgroundColor: "white",
-          overflowY: "auto",
-        }}
-      >
+
+      {/* Right side */}
+      <div className="d-flex flex-column flex-grow-1 bg-white overflow-auto">
         <Header />
 
-        {/* Content area */}
-        <div style={{ flexGrow: 1, padding: "20px" }}>
+        {/* Content */}
+        <div className="flex-grow-1 p-3">
           <Outlet />
         </div>
 

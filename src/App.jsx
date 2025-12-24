@@ -5,12 +5,12 @@ import {
   Routes,
 } from "react-router-dom";
 
-import Login from "./pages_temp/Login";
-import Products from "./pages_temp/Products";
-import View from "./pages_temp/ViewProd";
-import Layout from "./pages_temp/Layout";
-import EditProduct from "./pages_temp/EditProd";
-import AddProduct from "./pages_temp/AddProd";
+import Login from "./Pages/Login";
+import Products from "./Pages/Products";
+import View from "./Pages/ViewProd";
+import Layout from "./pages/Layout";
+import EditProduct from "./pages/EditProd";
+import AddProduct from "./pages/AddProd";
 import UserProvider from "./context/UserProvider";
 
 export default function App() {

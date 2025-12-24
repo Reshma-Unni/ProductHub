@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { getAllProducts, deleteProduct, searchProduct } from "../utils/api";
@@ -7,7 +7,7 @@ import { getAllProducts, deleteProduct, searchProduct } from "../utils/api";
 export default function Products() {
   const [data, setData] = useState([]);
   const [skip, setSkip] = useState(0);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const [search, setSearch] = useState("");
   const [deleteId, setDeleteId] = useState(null);
   const [show, setShow] = useState(false);
@@ -80,14 +80,14 @@ export default function Products() {
     >
       <h2 className="text-center mb-3">Product List</h2>
 
-      <div className="d-flex justify-content-end mb-3">
+      {/* <div className="d-flex justify-content-end mb-3">
         <button
           className="btn btn-primary mb-3"
           onClick={() => navigate("/addproduct")}
         >
           Add Product
         </button>
-      </div>
+      </div> */}
 
       <div className="d-flex justify-content-end mb-3">
         <input

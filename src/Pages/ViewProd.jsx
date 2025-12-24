@@ -34,6 +34,9 @@ export default function ViewProd() {
               <Button variant="warning" size="lg">
                 Add to Cart
               </Button>
+              {/* <Button variant="warning" size="lg">
+                But Now
+              </Button> */}
             </div>
           </Col>
 

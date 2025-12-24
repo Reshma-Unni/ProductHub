@@ -29,14 +29,10 @@ export default function ViewProd() {
               style={{ maxHeight: "350px" }}
             />
 
-            {/* Flipkart buttons */}
             <div className="mt-4 d-flex gap-3 justify-content-center">
               <Button variant="warning" size="lg">
                 Add to Cart
               </Button>
-              {/* <Button variant="warning" size="lg">
-                But Now
-              </Button> */}
             </div>
           </Col>
 

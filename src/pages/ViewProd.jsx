@@ -2,11 +2,19 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { FaStar } from "react-icons/fa";
+import { useContext } from "react";
+import { CartContext } from "../context/CartContext";
 
 export default function ViewProd() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
   const [product, setProduct] = useState(null);
+
+  const handleAddToCart = () => {
+    addToCart(product); // store selected product
+    navigate("/cart"); // go to cart page
+  };
 
   useEffect(() => {
     fetch(`https://dummyjson.com/products/${id}`)
@@ -30,7 +38,7 @@ export default function ViewProd() {
             />
 
             <div className="mt-4 d-flex gap-3 justify-content-center">
-              <Button variant="warning" size="lg">
+              <Button variant="warning" size="lg" onClick={handleAddToCart}>
                 Add to Cart
               </Button>
             </div>

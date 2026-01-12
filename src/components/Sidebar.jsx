@@ -41,7 +41,7 @@ export default function Sidebar() {
         <FaPlus /> Add Product
       </NavLink>
 
-      {/* CART */}
+      {/* CART
       <NavLink
         to="/cart"
         className={({ isActive }) =>
@@ -51,7 +51,7 @@ export default function Sidebar() {
         }
       >
         <FaShoppingCart /> Cart
-      </NavLink>
+      </NavLink> */}
 
       <div className="flex-grow-1" />
     </div>
